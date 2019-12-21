@@ -20,6 +20,48 @@
                         break;
                 }
             }
+
+            function playRound(playerSelection, computerSelection) {
+                if (playerSelection.toLowerCase() === 'rock') {
+                    switch (computerSelection.toLowerCase()) {
+                        case 'rock':
+                            return 'Draw!';
+                            break;
+                        case 'paper':
+                            return 'You lose!';
+                            break;
+                        case 'scissors':
+                            return 'You win!';
+                            break;
+                    }
+                } else if (playerSelection.toLowerCase() === 'paper') {
+                    switch (computerSelection.toLowerCase()) {
+                        case 'rock':
+                            return 'You win!';
+                            break;
+                        case 'paper':
+                            return 'Draw!';
+                            break;
+                        case 'scissors':
+                            return 'You lose!';
+                            break;
+                    }
+                } else if (playerSelection.toLowerCase() === 'scissors') {
+                    switch (computerSelection.toLowerCase()) {
+                        case 'rock':
+                            return 'You lose!';
+                            break;
+                        case 'paper':
+                            return 'You win!';
+                            break;
+                        case 'scissors':
+                            return 'Draw!';
+                            break;
+                    }
+                } else {
+                    return 'Player selection not recognized.';
+                }
+            }
         </script>
     </body>
 </html>
