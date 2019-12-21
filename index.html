@@ -62,6 +62,26 @@
                     return 'Player selection not recognized.';
                 }
             }
+
+            function game() {
+                let playerWins = 0;
+                let computerWins = 0;
+
+                for (let i = 0; i < 5; i++) {
+                    let playerSelection = prompt("Rock, paper or scissors?");
+                    let result = playRound(playerSelection, computerPlay());
+
+                    console.log(result);
+
+                    if (result === 'You win!') {
+                        playerWins++;
+                    } else if (result === 'You lose!') {
+                        computerWins++;
+                    }
+                }
+
+                console.log(`Final score: Player ${playerWins} - ${computerWins} Computer`);
+            }
         </script>
     </body>
 </html>
