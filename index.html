@@ -4,24 +4,22 @@
         <title>Rock, Paper, Scissors</title>
     </head>
     <body>
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+
         <script>
-            function computerPlay() {
-                const selection = Math.floor(Math.random() * 3);
+            const rock = document.querySelector('#rock');
+            const paper = document.querySelector('#paper');
+            const scissors = document.querySelector('#scissors');
 
-                switch (selection) {
-                    case 0:
-                        return 'rock';
-                        break;
-                    case 1:
-                        return 'paper';
-                        break;
-                    case 2:
-                        return 'scissors';
-                        break;
-                }
-            }
+            rock.addEventListener('click', () => {playRound('rock')});
+            paper.addEventListener('click', () => {playRound('paper')});
+            scissors.addEventListener('click', () => {playRound('scissors')});
 
-            function playRound(playerSelection, computerSelection) {
+            function playRound(playerSelection) {
+                const computerSelection = computerPlay();
+
                 if (playerSelection.toLowerCase() === 'rock') {
                     switch (computerSelection.toLowerCase()) {
                         case 'rock':
@@ -63,22 +61,29 @@
                 }
             }
 
+            function computerPlay() {
+                const selection = Math.floor(Math.random() * 3);
+
+                switch (selection) {
+                    case 0:
+                        return 'rock';
+                        break;
+                    case 1:
+                        return 'paper';
+                        break;
+                    case 2:
+                        return 'scissors';
+                        break;
+                }
+            }
+
+            
+
             function game() {
                 let playerWins = 0;
                 let computerWins = 0;
 
-                for (let i = 0; i < 5; i++) {
-                    let playerSelection = prompt("Rock, paper or scissors?");
-                    let result = playRound(playerSelection, computerPlay());
-
-                    console.log(result);
-
-                    if (result === 'You win!') {
-                        playerWins++;
-                    } else if (result === 'You lose!') {
-                        computerWins++;
-                    }
-                }
+                
 
                 console.log(`Final score: Player ${playerWins} - ${computerWins} Computer`);
             }
