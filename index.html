@@ -8,7 +8,13 @@
         <button id="paper">Paper</button>
         <button id="scissors">Scissors</button>
 
+        <div id="results"></div>
+
         <script>
+            let playerScore = 0;
+            let computerScore = 0;
+            let roundsPlayed = 0;
+
             const rock = document.querySelector('#rock');
             const paper = document.querySelector('#paper');
             const scissors = document.querySelector('#scissors');
@@ -17,47 +23,86 @@
             paper.addEventListener('click', () => {playRound('paper')});
             scissors.addEventListener('click', () => {playRound('scissors')});
 
+            const decision = document.createElement('p');
+            decision.textContent = `Make your choice to start the game.`;
+
+            const score = document.createElement('p');
+            score.textContent = `Player ${playerScore} - ${computerScore} Computer`;
+
+            results.appendChild(decision);
+            results.appendChild(score);
+
             function playRound(playerSelection) {
                 const computerSelection = computerPlay();
 
                 if (playerSelection.toLowerCase() === 'rock') {
                     switch (computerSelection.toLowerCase()) {
                         case 'rock':
-                            return 'Draw!';
+                            decision.textContent = `It's a draw! Both players chose rock.`;
                             break;
                         case 'paper':
-                            return 'You lose!';
+                            decision.textContent = `Computer wins! Paper beats rock.`;
+                            computerScore++;
+                            score.textContent = `Player ${playerScore} - ${computerScore} Computer`;
                             break;
                         case 'scissors':
-                            return 'You win!';
+                            decision.textContent = `Player wins! Rock beats scissors.`;
+                            playerScore++;
+                            score.textContent = `Player ${playerScore} - ${computerScore} Computer`;
                             break;
                     }
                 } else if (playerSelection.toLowerCase() === 'paper') {
                     switch (computerSelection.toLowerCase()) {
                         case 'rock':
-                            return 'You win!';
+                            decision.textContent = `Player wins! Paper beats rock.`;
+                            playerScore++;
+                            score.textContent = `Player ${playerScore} - ${computerScore} Computer`;;
                             break;
                         case 'paper':
-                            return 'Draw!';
+                            decision.textContent = `It's a draw! Both players chose paper.`;
                             break;
                         case 'scissors':
-                            return 'You lose!';
+                            decision.textContent = `Computer wins! Scissors beats paper.`;
+                            computerScore++;
+                            score.textContent = `Player ${playerScore} - ${computerScore} Computer`;
                             break;
                     }
                 } else if (playerSelection.toLowerCase() === 'scissors') {
                     switch (computerSelection.toLowerCase()) {
                         case 'rock':
-                            return 'You lose!';
+                            decision.textContent = `Computer wins! Rock beats scissors.`;
+                            computerScore++;
+                            score.textContent = `Player ${playerScore} - ${computerScore} Computer`;
                             break;
                         case 'paper':
-                            return 'You win!';
+                            decision.textContent = `Player wins! Scissors beats paper.`;
+                            playerScore++;
+                            score.textContent = `Player ${playerScore} - ${computerScore} Computer`;
                             break;
                         case 'scissors':
-                            return 'Draw!';
+                            decision.textContent = `It's a draw! Both players chose scissors.`;
                             break;
                     }
                 } else {
-                    return 'Player selection not recognized.';
+                    console.log('Player selection not recognized.');
+                }
+
+                roundsPlayed++;
+
+                if (roundsPlayed == 5) {
+                    if (playerScore > computerScore) {
+                        decision.textContent = `Game over. Player wins! Make your move to start again.`;
+                    } else if (playerScore < computerScore) {
+                        decision.textContent = `Game over. Computer wins! Make your move to start again.`;
+                    } else {
+                        decision.textContent = `Game over. It's a draw! Make your move to start again.`;
+                    }
+
+                    score.textContent = `Player ${playerScore} - ${computerScore} Computer`; 
+
+                    roundsPlayed = 0;
+                    playerScore = 0;
+                    computerScore = 0;
                 }
             }
 
@@ -75,17 +120,6 @@
                         return 'scissors';
                         break;
                 }
-            }
-
-            
-
-            function game() {
-                let playerWins = 0;
-                let computerWins = 0;
-
-                
-
-                console.log(`Final score: Player ${playerWins} - ${computerWins} Computer`);
             }
         </script>
     </body>
